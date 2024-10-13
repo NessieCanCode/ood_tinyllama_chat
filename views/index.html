@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyLlama Chat</title>
+</head>
+<body>
+    <h1>TinyLlama Chat Interface</h1>
+    <div id="chat-container">
+        <div id="messages"></div>
+        <input type="text" id="user-input" placeholder="Type your message here..."/>
+        <button id="send-btn">Send</button>
+    </div>
+
+    <script>
+        document.getElementById('send-btn').addEventListener('click', async () => {
+            const message = document.getElementById('user-input').value;
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message })
+            });
+            const data = await response.json();
+            document.getElementById('messages').innerHTML += `<div><b>You:</b> ${message}</div>`;
+            document.getElementById('messages').innerHTML += `<div><b>TinyLlama:</b> ${data.response}</div>`;
+            document.getElementById('user-input').value = '';
+        });
+    </script>
+</body>
+</html>
