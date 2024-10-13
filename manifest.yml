@@ -1,0 +1,7 @@
+---
+name: "TinyLlama Chat"
+description: "Chat with TinyLlama 1.1B model on a node"
+version: "1.0"
+category: "Machine Learning"
+role: "Batch Connect"
+icon: "fas://comments"
