@@ -1,0 +1,14 @@
+from flask import Flask, request, jsonify
+from tiny_llama import LlamaModel
+
+app = Flask(__name__)
+model = LlamaModel.load_model('tiny_llama_1.1b')
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    user_input = request.json.get('message', '')
+    response = model.generate_response(user_input)
+    return jsonify({'response': response})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
